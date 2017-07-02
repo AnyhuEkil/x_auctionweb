@@ -3,89 +3,65 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cto.auction.repository.auctionUser.AuctionUserDAO">
-
-<!--  테스트/관리자용 회원정보
+	<!-- 테스트/관리자용 회원정보 -->
 	<select id="auctionUserList" resultType="auctionUser">
-		SELECT
-		USER_ID AS userId,
-		USER_NAME AS userName,
-		EMAIL AS email,
-		PASSWORD
-		AS password,
-		REGISTER_DATE as registerDate,
-		AUTH AS auth,
-		USER_POINT AS
-		userPoint,
-		REAL_NAME AS realName,
-		ADDRESS AS address,
-		ZIP_CODE AS	zipCode,
-		PHONE_NUMBER as phoneNumber,
-		PICTURE AS picture
-		FROM
-		AUCTION_USER
-		WHERE 1=1
-		<if test="userId!=null">and USER_ID like '%'||#{userId}||'%'</if>
+		SELECT * FROM AUCTION_USER WHERE 1=1
+		<if test="user_id!=null">and USER_ID
+			like '%'||#{user_id}||'%'</if>
 		<if test="email!=null">and EMAIL like '%'||#{email}||'%'</if>
 	</select>
-
-로그인체크
-TODO 필요없는 항목지워야함... 세션에 대해 이해가 부족해서 몰라서일단 둠.
 	<select id="loginCheck" resultType="auctionUser">
-		SELECT
-		USER_ID AS userId,
-		USER_NAME AS userName,
-		EMAIL AS email,
-		PASSWORD AS password,
-		REGISTER_DATE as registerDate,
-		AUTH AS auth,
-		USER_POINT AS userPoint,
-		REAL_NAME AS realName,
-		ADDRESS AS address,
-		ZIP_CODE AS zipCode,
-		PHONE_NUMBER as phoneNumber,
-		PICTURE AS picture
-		FROM
+		SELECT * FROM AUCTION_USER
+		WHERE email = #{email} AND password = #{password}
+	</select>
+	<!-- 회원가입 : USER_ID자동생성 ,권한 및 포인트 기본 0 -->
+	<select id="signUpProc" resultType="auctionUser">
+		INSERT INTO
 		AUCTION_USER
-		WHERE
-		email = #{email} AND
-		password = #{password}
+		(EMAIL, PASSWORD, USER_NAME, REGISTER_DATE) VALUES
+		(#{email},
+		#{password}, #{user_name}, SYSDATE)
 	</select>
-	
-	회원가입 : USER_ID자동생성 ,권한 및 포인트 기본 0
-	<select id="auctionUserInsert" resultType="auctionUser">
-		INSERT INTO MEMBER VALUES(#{id}, #{pwd}, #{name}, SYSDATE)
-		INSERT INTO AUCTION_USER
-		(EMAIL, PASSWORD, USER_NAME, REGISTER_DATE)
-		VALUES
-		(#{email}, #{password},
-		#{userName}, SYSDATE)
-	</select>
-	
-	TODO user_id값으로 찾고 싶은데, 지금 저장값이 email, password밖에 없음.
+
 	<select id="auctionUserInfo" resultType="auctionUser">
-		SELECT
-		USER_ID AS userId,
-		USER_NAME AS userName,
-		EMAIL AS email,
-		PASSWORD AS password,
-		REGISTER_DATE as registerDate,
-		AUTH AS auth,
-		USER_POINT AS userPoint,
-		REAL_NAME AS realName,
-		ADDRESS AS address,
+		SELECT * FROM AUCTION_USER WHERE USER_ID = ${user_id }
+		<!-- SELECT
+		USER_ID
+		USER_NAME
+		EMAIL AS email, PASSWORD AS password,
+		REGISTER_DATE as registerDate, AUTH
+		AS auth, USER_POINT AS userPoint,
+		REAL_NAME AS realName, ADDRESS AS
+		address,
 		ZIP_CODE AS zipCode,
-		PHONE_NUMBER as phoneNumber,
-		PICTURE AS picture
-		FROM
-		AUCTION_USER
-		WHERE
-		EMAIL = #{email}
+		PHONE_NUMBER as phoneNumber, PICTURE AS picture FROM
+		AUCTION_USER WHERE
+		EMAIL = #{email} -->
 	</select>
 	<update id="auctionUserUpdate" parameterType="auctionUser">
-		UPDATE AUCTION_USER SET PASSWORD = #{password},	USER_NAME = #{userName} WHERE USER_ID = #{userId}
+		UPDATE
+		AUCTION_USER
+		SET
+		PICTURE_LOCATION = #{picture_location},
+		PHONE_NUMBER =
+		#{phone_number},
+		USER_NAME = #{user_name},
+		PASSWORD = #{password}
+		WHERE USER_ID = ${user_id } 
+	</update>
+	<update id="auctionUserUpdate2" parameterType="auctionUser">
+	UPDATE
+	AUCTION_USER
+	SET
+	REAL_NAME = #{real_name},
+	ADDRESS = #{address},
+	ZIP_CODE = #{zip_code},
+	PHONE_NUMBER = #{phone_number}
+	WHERE USER_ID = ${user_id }
 	</update>
 	<delete id="auctionUserDelete">
-		DELETE FROM AUCTION_USER WHERE USER_ID = #{userId} AND PASSWORD = #{password}
-	</delete> -->
+		DELETE FROM AUCTION_USER WHERE USER_ID = #{user_id}
+	</delete>
+
 
 </mapper>

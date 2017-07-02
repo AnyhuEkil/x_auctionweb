@@ -1,33 +1,47 @@
-package com.cto.auction.controller;
-
-import javax.servlet.http.HttpSession;
+package com.cto.auction.controller.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+
+import com.cto.auction.service.auctionUser.AuctionUserService;
+import com.cto.auction.vo.auctionUser.AuctionUser;
 
 
 @Service
 @RequestMapping("/*")
-public class MyPageController {
+public class MainController {
 	@Autowired(required=false)
-/*	private AuctionUserService service;
-	private UserPaymentService service2;
+	private AuctionUserService AuctionUserService;
+	
 	
 	@RequestMapping("main.do")
 	public String main(){
 		return "main/main";
 	}
 	
-	// TODO 같은코드 반복.. 줄이는 방법모색
-	@RequestMapping("main/menuList.do")
-	public ModelAndView mainMenuList(ModelAndView mav){
-		mav.setViewName("main/menuHome");
-		mav.addObject("paramPage01", "main/menuList");
-		return mav;
+	// 테스트용 리스트
+	@RequestMapping("list.do")
+	public String auctionUserList(@ModelAttribute("testCtrlModelAttribute") AuctionUser sch, Model m) {
+		// controller => service => dao 요청
+		m.addAttribute("list", AuctionUserService.auctionUserList(sch));
+		return "main/list";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/*	// TODO 같은코드 반복.. 줄이는 방법모색
+	
+	
 	@RequestMapping("myPage/auctionInfo.do")
 	public ModelAndView myPageAuctionInfo(ModelAndView mav){
 		mav.setViewName("main/menuHome");
@@ -88,19 +102,6 @@ public class MyPageController {
 	// TODO 공지, 판매자, 등록..
 	
 	
-//	회원정보 수정
-	@RequestMapping("myPage/update.do")
-	public String auctionUserUpdate(AuctionUser upt){
-		service.auctionUserUpdate(upt);
-		return "redirect:/myPage/userInfo.do";
-		}
-
-//	회원 삭제
-	@RequestMapping("myPage/delete.do")
-	public String auctionUserDelete(AuctionUser del, HttpSession session){
-		service.auctionUserDelete(del, session);
-		return "redirect:/main.do";
-	}
 //	로그아웃
 	@RequestMapping("logout.do")
 	public ModelAndView logout(HttpSession session, ModelAndView mav){

@@ -1,4 +1,4 @@
-package com.cto.auction.controller;
+package com.cto.auction;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;

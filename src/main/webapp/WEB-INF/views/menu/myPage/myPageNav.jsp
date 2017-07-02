@@ -17,25 +17,25 @@
 <style type="text/css"></style>
 </head>
 <body>
-<%-- 	<div>
-		<a href="${path }auctionInfo.do">입찰정보</a>
+	<div>
+		<a href="${path }/myPage/auctionInfo.do">입찰정보</a>
 		<!-- TODO 입찰중인 상품 갯수 -->
 	</div>
 	<div>
-		<a href="${path }message.do">쪽지함</a>
+		<a href="${path }/myPage/message.do">쪽지함</a>
 	</div>
 	<div>
-		<a href="${path }getInfo.do">낙찰/배송</a>
+		<a href="${path }/myPage/delivery.do">배송확인</a>
 		<!-- TODO 입찰중인 상품 갯수 -->
 	</div>
 	<div>
-		<a href="${path }ocationInfo.do">주소지등록</a>
-	</div> --%>
-	<div>
-		<a href="${path }userPayment.do">신용카드</a>
+		<a href="${path }/myPage/locationInfo.do">주소지등록</a>
 	</div>
-<%-- 	<div>
-		<a href="${path }userInfo.do">회원개인정보</a>
-	</div> --%>
+	<div>
+		<a href="${path }/myPage/userPayment.do">신용카드</a>
+	</div>
+	<div>
+		<a href="${path }/myPage/userInfo.do">회원개인정보</a>
+	</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -24,7 +24,6 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 	});
-
 </script>
 <style type="text/css">
 </style>
@@ -43,28 +42,32 @@
 
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
+					<c:if test="${msg=='logout' }">
+						<div style="color: red;">로그아웃되었습니다.</div>
+					</c:if>
 					<c:choose>
-						<c:when test="${sessionScope.mem.email == null }">
+						<c:when test="${sessionScope.mem.user_id == null }">
 							<!-- TODO 새창 띄우기
 								 onclick="window.open(this.href,'_blank','width=800,height=600, scrollbars=yes');return false;" -->
 							<li class=""><a href="${path }/auctionUser/login.do">Login</a></li>
-							<li class=""><a href="${path }/auctionUser/insert.do">Sign-Up</a></li>
+							<li class=""><a href="${path }/auctionUser/signUp.do">Sign-Up</a></li>
 						</c:when>
 						<c:otherwise>
-							<!-- TODO 테스트 나머지 삭제 -->
-							<li style="color: white;">[ ${sessionScope.mem.userName } ]님
-								환영합니다.</li>
-							<li style="color: white;">Point : [	${sessionScope.mem.userPoint } ]</li>
+							<li style="color: white;">[${sessionScope.mem.picture_location }]프로필사진</li>
+							<li style="color: white;">[${sessionScope.mem.user_name }]님 환영합니다.</li>
+							<li style="color: white;">[${sessionScope.mem.user_name }]읽지않은메세지갯수(jsp수정해야됨.)</li>
+							<li style="color: white;">Point : [	${sessionScope.mem.user_point } ]</li>
 							<!-- TODO 드랍다운 메뉴 만들어서 묶어야됨 -->
-							<li class=""><a href="${path }/main/menuList.do">MENU</a></li>
+							<li class=""><a href="${path }/menuHome.do">MENU</a></li>
 							<!-- TODO 공지사항 및 문의 주소 변경 해야됨 -->
-							<li class=""><a href="${path }/main/menuList.do">공지/문의</a></li>
+							<li class=""><a
+								href="${path }/notice/notice.do">공지/문의</a></li>
 							<!-- 회원정보(메뉴) : 개인정보,입찰정보,배송지정보,카드정보,쪽지함 페이지로~ -->
-							<li class=""><a href="${path }/myPage/userInfo.do">회원정보(메뉴)</a>
-							</li>
+							<li class=""><a
+								href="${path }/myPage/userInfo.do">회원정보(메뉴)</a></li>
 							<!-- 판매정보(메뉴) : 판매자 정보, 판매물품, 물품등록, 출금?? 등등..  -->
-							<li class=""><a href="${path }/main/menuList.do">판매정보(메뉴)</a></li>
-							<li class=""><a href="${path }/logout.do">로그아웃</a></li>
+							<li class=""><a href="${path }/TODO.do">판매정보(메뉴)</a></li>
+							<li class=""><a href="${path }/auctionUser/logout.do">로그아웃</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>

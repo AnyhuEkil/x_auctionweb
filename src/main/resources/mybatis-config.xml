@@ -4,7 +4,8 @@
 <configuration>
 	<typeAliases>
 		<!-- 별명 설정 -->
-		<!-- <typeAlias alias="auctionUser" type="com.cto.auction.vo.auctionUser.AuctionUser"/> -->
+		<typeAlias alias="auctionUser" type="com.cto.auction.vo.auctionUser.AuctionUser"/>
+		<typeAlias alias="AuctionItem" type="com.cto.auction.vo.auctionItem.AuctionItem"/>
 	</typeAliases>
 </configuration>
 	

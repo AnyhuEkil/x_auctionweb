@@ -4,10 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:requestEncoding value="UTF-8" />
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<%
-	request.setCharacterEncoding("UTF-8");
-	String path = request.getContextPath();
-%>
+<%	request.setCharacterEncoding("UTF-8");	String path = request.getContextPath();%>
 
 <!DOCTYPE html>
 <html>
@@ -22,14 +19,10 @@
 </script>
 </head>
 <body>
-	
-	
-	<div>.
 		<c:import url="header.jsp" />
-	</div>
-	<c:if test="${msg=='logout' }">
-		<div style="color: red;">로그아웃되었습니다.</div>
-	</c:if>
+	<br/>
+	<br/>
+	<br/>
 	<div>
 		<h1>카테고리(작업후삭제)</h1>
 	</div>
@@ -37,7 +30,7 @@
 		<h1>상단슬라이드(작업후삭제)</h1>
 		<!-- 쿼리문으로 이미지 조건 만든후 삽입. -->
 		<div>
-			<img src="${slideImg1}" alt="mainSideImg01" />
+			<img src="${slideImg1}" alt="TODO 경로,파일,CSS" />
 		</div>
 		<div>
 			<img src="${slideImg2}" alt="mainSideImg02" />
@@ -50,16 +43,16 @@
 		</div>
 	</div>
 	<div>
-		<h1>하단상품3개(작업후삭제)</h1>
+		<h1>item list 분류해서 가져오기(list형태로 값만 불러오면됨.)</h1>
 		<c:forEach var="mainThree" items="${mainItem }">
 			<div>
 				<!-- TODO 클릭시 상품화면 이동 -->
 				<div>
-					<img src="${mainThree.picture}" alt="itemImg01" />
+					<img src="${mainThree.picture_location}" alt="itemImg01" />
 				</div>
-				<div>이름 : ${mainThree.itemName}</div>
-				<div>가격 : ${mainThree.currentBidAmount }</div>
-				<div>마감시간 : ${mainThree.endDate }</div>
+				<div>이름 : ${mainThree.item_name}</div>
+				<div>가격 : ${mainThree.current_bid_amount }</div>
+				<div>마감시간 : ${mainThree.end_date }</div>
 			</div>
 		</c:forEach>
 	</div>
